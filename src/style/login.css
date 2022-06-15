@@ -1,6 +1,6 @@
 .loginForm {
   background-color: white;
-  padding: 100px;
+  padding: 100px 0px 100px 0px;
   border-radius: 5%;
   /* margin-left: 45%; */
 }
@@ -31,7 +31,44 @@
 }
 .logo-of-form {
   display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 .logo-of-form p {
   margin: 0;
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 17.6804px;
+  color: #f17228;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+.ant-input {
+  border-radius: 20px;
+  border: #f17228 1px solid;
+  width: 80%;
+}
+
+.ant-input:hover {
+  border: #f17228 1px solid;
+  box-shadow: #f17228;
+}
+.input label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #f17228;
+}
+.ant-form-item-label {
+  text-align: start;
+}
+.forget-pass-btn {
+  border: none;
+  background-color: white;
+  color: #f17228;
+  margin-top: 20px;
+  margin-left: 80px;
 }

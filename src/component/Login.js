@@ -23,9 +23,6 @@ export default function Login() {
             labelCol={{
               span: 8,
             }}
-            wrapperCol={{
-              span: 16,
-            }}
             initialValues={{
               remember: true,
             }}
@@ -39,28 +36,30 @@ export default function Login() {
             </div>
             <Form.Item
               label="И-мэйл"
-              name="username"
+              name="email"
+              className="input"
               rules={[
                 {
                   required: true,
-                  message: "Please input your username!",
+                  message: "И-мэйл хаягаа оруулна уу!",
                 },
               ]}
             >
-              <Input />
+              <Input placeholder="И-мэйл хаягаа оруулна уу" />
             </Form.Item>
 
             <Form.Item
               label="Нууц үг"
               name="password"
+              className="input"
               rules={[
                 {
                   required: true,
-                  message: "Please input your password!",
+                  message: "Нууц үгээ оруулна уу!",
                 },
               ]}
             >
-              <Input.Password />
+              <Input.Password placeholder="Нууц үгээ оруулна у" />
             </Form.Item>
 
             <Form.Item
@@ -71,7 +70,7 @@ export default function Login() {
                 span: 16,
               }}
             >
-              <Checkbox>Remember me</Checkbox>
+              <Button className="forget-pass-btn">Нууц үг мартсан?</Button>
             </Form.Item>
 
             <Form.Item

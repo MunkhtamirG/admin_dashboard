@@ -1,0 +1,31 @@
+.header {
+  text-align: center;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+.header span {
+  margin-right: 40px;
+}
+
+.cols {
+  /* margin-left: 30px; */
+  padding-left: 50px;
+  /* color: aliceblue; */
+}
+.ant-divider-inner-text {
+  display: flex !important;
+  font-weight: 700;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 0 !important;
+}
+.page-header-name div {
+  width: 8px;
+  height: 31px;
+  background: #f17228;
+  margin-right: 10px;
+}
+.ant-checkbox {
+  width: 16px !important;
+}

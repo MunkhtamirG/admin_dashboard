@@ -6,10 +6,8 @@ import moment from "moment";
 
 function App() {
   // const [user, setUser] = useUser();
-  const [user, setUser] = useState(false);
-  console.log(
-    moment("2011-10:31 0923", "YYYYMMDD HHmm").format("YYYY/MM/DD --- HH:mm")
-  );
+  const [user, setUser] = useState(true);
+
   return <>{user ? <Login /> : <Dashboard />}</>;
 }
 

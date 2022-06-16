@@ -35,3 +35,59 @@
   flex-direction: column;
   min-height: 100vh;
 }
+.admin-button {
+  border: none;
+  background-color: #ffece1;
+  box-shadow: none;
+  color: #f17228;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-button:hover {
+  border: none;
+  background-color: #ffece1;
+  box-shadow: none;
+  color: #f17228;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-button img {
+  margin-right: 5px;
+}
+.ant-menu-item-active {
+  background-color: white !important;
+  color: #f17228 !important;
+}
+.ant-menu-item-selected {
+  background-color: white !important;
+  color: #f17228 !important;
+}
+.ant-menu-title-content {
+  font-size: 14px;
+  font-weight: 700;
+}
+.ant-menu-item-active::after {
+  border-right: 3px solid #f17228 !important;
+}
+.ant-menu-item-selected::after {
+  border-right: 3px solid #f17228 !important;
+}
+.dropdown-items {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+}
+.settings-form-items {
+  display: flex;
+  flex-direction: column;
+}
+.ant-form-item-required {
+  margin-left: 20px;
+}
+.save-button {
+  background-color: #f17228;
+  border: none;
+  margin-top: 400px;
+  width: 100%;
+  border-radius: 10px;
+}

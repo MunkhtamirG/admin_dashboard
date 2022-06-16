@@ -4,6 +4,7 @@ import "../style/login.css";
 import Icons from "../pictures/icons/icons.js";
 import { userService } from "../services/userService.js";
 import { useUser } from "../contexts/UserContext";
+import { Toast } from "toaster-js";
 
 export default function Login() {
   const [user, setUser] = useUser();
@@ -12,9 +13,23 @@ export default function Login() {
       .loginUser(values)
       .then((res) => res.json())
       .then((res) => {
-        setUser(res.data);
-        localStorage.setItem("userInfo", JSON.stringify(res.data));
-        console.log(user);
+        if (res.success === true) {
+          setUser({
+            email: res.data.email,
+            // userName: res.data.name,
+            phone: res.data.phone,
+            token: res.token,
+          });
+          localStorage.setItem(
+            "userInfo",
+            JSON.stringify({
+              email: res.data.email,
+              // userName: res.data.name,
+              phone: res.data.phone,
+              token: res.token,
+            })
+          );
+        }
       });
 
     console.log("Success:", values);

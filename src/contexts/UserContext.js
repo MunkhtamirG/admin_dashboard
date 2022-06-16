@@ -12,7 +12,7 @@ export const UserProvider = (props) => {
     if (localStorage.getItem("userInfo")) {
       const data = JSON.parse(localStorage.getItem("userInfo"));
       setUser({
-        // userName: data.name,
+        userName: data.name,
         email: data.email,
         token: data.token,
         phone: data.phone,

@@ -1,24 +1,30 @@
 import React, { useEffect } from "react";
-import { otherServices } from "../../services/otherServices";
 import { useOrder } from "../../contexts/OrderContext";
-import { List, Row, Col, Divider, Checkbox } from "antd";
+import { List, Row, Col, Divider, Checkbox, Pagination } from "antd";
 import "../../style/menuStyle/orders.css";
+import { otherServices } from "../../services/otherServices";
 import { useUser } from "../../contexts/UserContext";
+import moment from "moment";
+import { userService } from "../../services/userService";
+
 export default function Orders() {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
 
   useEffect(() => {
+    userService
+      .getAllUser({ token: user.token })
+      .then((e) => e.json())
+      .then((e) => console.log(e));
     otherServices
-      .getAllOrders(user.token)
+      .getAllOrders({ token: user.token })
       .then((e) => e.json())
       .then((e) => {
-        setOrder(e.Orders);
+        setOrder(e.data);
         console.log(e);
       });
   }, []);
 
-  console.log(order);
   return (
     <div>
       <Divider orientation="left" className="page-header-name">
@@ -56,23 +62,44 @@ export default function Orders() {
                   <Col
                     className="cols"
                     xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
+                    lg={{ span: 1, offset: 1 }}
                   >
-                    {item.customer}
+                    {moment(item.created_date).format("YYYY/MM/DD hh:mm")}
                   </Col>
                   <Col
                     className="cols"
                     xs={{ span: 11, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
+                    lg={{ span: 2, offset: 1 }}
                   >
-                    {item.customer}
+                    {item.__v}
                   </Col>
                   <Col
                     className="cols"
                     xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
+                    lg={{ span: 2, offset: 1 }}
                   >
-                    {item.customer}
+                    {item.status}
+                  </Col>
+                  <Col
+                    className="cols"
+                    xs={{ span: 5, offset: 1 }}
+                    lg={{ span: 2, offset: 1 }}
+                  >
+                    {item.total_price}
+                  </Col>
+                  <Col
+                    className="cols"
+                    xs={{ span: 5, offset: 1 }}
+                    lg={{ span: 2, offset: 1 }}
+                  >
+                    {item.payment_type}
+                  </Col>
+                  <Col
+                    className="cols"
+                    xs={{ span: 5, offset: 1 }}
+                    lg={{ span: 2, offset: 1 }}
+                  >
+                    {item.status}
                   </Col>
                 </Row>
               </List.Item>

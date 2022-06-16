@@ -67,16 +67,16 @@ export default function Dashboard() {
       ]}
     />
   );
+
   return (
     <>
       <Layout style={{ margin: "0" }}>
         <Sider theme="light" className="sider">
+          <div className="logo-name">
+            {<img src={Icons.logo} />}
+            <p>Food Delivery</p>
+          </div>
           <Menu theme="light" defaultSelectedKeys={["1"]} mode="inline">
-            <div className="logo-name">
-              {<img src={Icons.logo} />}
-              <p>Food Delivery</p>
-            </div>
-
             {MENU.map((e) => {
               return (
                 <Menu.Item

@@ -27,9 +27,19 @@ const editUserInfo = async (credentials) => {
   });
 };
 
+const getAllUser = async (credentials) => {
+  return await fetch("https://dev-api.mstars.mn/admin/users", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+};
+
 const userInfoStorage = (userInfo) => {
   localStorage.setItem("token", userInfo.token);
-  localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
+  localStorage.setItem("userInfo", JSON.stringify(userInfo));
 };
 
 export const userService = {
@@ -37,4 +47,5 @@ export const userService = {
   registerUser,
   userInfoStorage,
   editUserInfo,
+  getAllUser,
 };

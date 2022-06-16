@@ -1,5 +1,5 @@
-import React from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input, Button } from "antd";
 import "../style/login.css";
 import Icons from "../pictures/icons/icons.js";
 import { userService } from "../services/userService.js";
@@ -9,29 +9,26 @@ export default function Login() {
   const [user, setUser] = useUser();
   const onFinish = (values) => {
     userService
+
       .loginUser(values)
       .then((res) => res.json())
       .then((res) => {
         if (res.success === true) {
+          userService.userInfoStorage({
+            email: res.data.email,
+            userName: res.data.name,
+            phone: res.data.phone,
+            token: res.token,
+          });
+          alert(res.status);
           setUser({
             email: res.data.email,
             userName: res.data.name,
             phone: res.data.phone,
             token: res.token,
           });
-          localStorage.setItem(
-            "userInfo",
-            JSON.stringify({
-              email: res.data.email,
-              userName: res.data.name,
-              phone: res.data.phone,
-              token: res.token,
-            })
-          );
         }
       });
-
-    console.log("Success:", values);
   };
 
   const onFinishFailed = (errorInfo) => {

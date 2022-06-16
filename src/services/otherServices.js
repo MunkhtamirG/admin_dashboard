@@ -1,5 +1,5 @@
 const getAllOrders = async (credentials) => {
-  return await fetch("https://dev-api.mstars.mn/api/order", {
+  return await fetch("https://dev-api.mstars.mn/api/orders", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -17,11 +17,12 @@ const getAllOrders = async (credentials) => {
 //   });
 // };
 
-// const userInfoStorage = (userInfo) => {
-//   localStorage.setItem("token", userInfo.token);
-//   localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
-// };
+const userInfoStorage = (userInfo) => {
+  localStorage.setItem("token", userInfo.token);
+  localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
+};
 
 export const otherServices = {
   getAllOrders,
+  userInfoStorage,
 };

@@ -18,7 +18,7 @@ const registerUser = async (credentials) => {
 };
 
 const editUserInfo = async (credentials) => {
-  return await fetch("http://dev-api.mstars.mn/admin/update/user", {
+  return await fetch("https://dev-api.mstars.mn/admin/update/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

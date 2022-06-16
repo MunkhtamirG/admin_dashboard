@@ -1,9 +1,10 @@
-const getAllOrders = async () => {
+const getAllOrders = async (credentials) => {
   return await fetch("https://dev-api.mstars.mn/api/order", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify(credentials),
   });
 };
 // const registerUser = async (credentials) => {

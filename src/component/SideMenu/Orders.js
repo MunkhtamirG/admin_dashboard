@@ -3,13 +3,19 @@ import { otherServices } from "../../services/otherServices";
 import { useOrder } from "../../contexts/OrderContext";
 import { List, Row, Col, Divider, Checkbox } from "antd";
 import "../../style/menuStyle/orders.css";
+import { useUser } from "../../contexts/UserContext";
 export default function Orders() {
   const [order, setOrder] = useOrder();
+  const [user, setUser] = useUser();
+
   useEffect(() => {
     otherServices
-      .getAllOrders()
+      .getAllOrders(user.token)
       .then((e) => e.json())
-      .then((e) => setOrder(e.Orders));
+      .then((e) => {
+        setOrder(e.Orders);
+        console.log(e);
+      });
   }, []);
 
   console.log(order);
@@ -33,7 +39,7 @@ export default function Orders() {
             <span>Төлөв</span>
           </div>
         }
-        footer={<div>Footer</div>}
+        footer={<div></div>}
         bordered
         dataSource={order}
         renderItem={(item) => {

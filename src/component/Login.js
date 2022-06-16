@@ -2,9 +2,21 @@ import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import "../style/login.css";
 import Icons from "../pictures/icons/icons.js";
+import { userService } from "../services/userService.js";
+import { useUser } from "../contexts/UserContext";
 
 export default function Login() {
+  const [user, setUser] = useUser();
   const onFinish = (values) => {
+    userService
+      .loginUser(values)
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res.data);
+        localStorage.setItem("userInfo", JSON.stringify(res.data));
+        console.log(user);
+      });
+
     console.log("Success:", values);
   };
 
@@ -59,7 +71,7 @@ export default function Login() {
                 },
               ]}
             >
-              <Input.Password placeholder="Нууц үгээ оруулна у" />
+              <Input.Password placeholder="Нууц үгээ оруулна уу" />
             </Form.Item>
 
             <Form.Item
@@ -73,14 +85,9 @@ export default function Login() {
               <Button className="forget-pass-btn">Нууц үг мартсан?</Button>
             </Form.Item>
 
-            <Form.Item
-              wrapperCol={{
-                offset: 8,
-                span: 16,
-              }}
-            >
-              <Button type="primary" htmlType="submit">
-                Submit
+            <Form.Item>
+              <Button type="primary" htmlType="submit" className="login-button">
+                Нэвтрэх
               </Button>
             </Form.Item>
           </Form>

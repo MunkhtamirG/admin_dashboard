@@ -3,12 +3,12 @@ import Dashboard from "./component/Dashboard";
 import Login from "./component/Login";
 import { useState } from "react";
 import moment from "moment";
+import { useUser } from "./contexts/UserContext";
 
 function App() {
-  // const [user, setUser] = useUser();
-  const [user, setUser] = useState(true);
+  const [user, setUser] = useUser();
 
-  return <>{user ? <Login /> : <Dashboard />}</>;
+  return <>{user ? <Dashboard /> : <Login />}</>;
 }
 
 export default App;

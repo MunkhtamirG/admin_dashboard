@@ -51,6 +51,11 @@
   border-radius: 20px;
   border: #f17228 1px solid;
   width: 80%;
+  margin-left: 10%;
+}
+#basic_password {
+  margin: 0;
+  width: 100%;
 }
 
 .ant-input:hover {
@@ -61,6 +66,13 @@
   font-weight: 600;
   font-size: 14px;
   color: #f17228;
+  margin-left: 30%;
+}
+.ant-input-password {
+  border-radius: 20px;
+  border: #f17228 1px solid;
+  width: 80%;
+  margin-left: 10%;
 }
 .ant-form-item-label {
   text-align: start;
@@ -71,4 +83,16 @@
   color: #f17228;
   margin-top: 20px;
   margin-left: 80px;
+}
+.login-button {
+  background-color: #f17228;
+  border: none;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 20px;
+  height: 40px;
+  font-size: 18px;
+}
+.login-button:hover {
+  background-color: #f17228 !important;
 }

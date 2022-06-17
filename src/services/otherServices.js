@@ -1,5 +1,5 @@
 const getAllOrders = async (credentials) => {
-  return await fetch("https://dev-api.mstars.mn/api/orders", {
+  return await fetch("https://dev-api.mstars.mn/api/orders?page=2", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

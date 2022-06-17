@@ -29,3 +29,43 @@
 .ant-checkbox {
   width: 16px !important;
 }
+.ant-pagination-options {
+  display: none !important;
+}
+.ant-pagination {
+  display: flex;
+  justify-content: center;
+}
+.lists {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+#status {
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+
+  background-color: #d7e8ff;
+}
+.blue {
+  background-color: #d7e8ff;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  color: black;
+}
+.green {
+  background-color: #27ae60;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+}
+.red {
+  background-color: #f63a3a;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+}

@@ -5,25 +5,54 @@ import "../../style/menuStyle/orders.css";
 import { otherServices } from "../../services/otherServices";
 import { useUser } from "../../contexts/UserContext";
 import moment from "moment";
-import { userService } from "../../services/userService";
+import { useState } from "react";
 
 export default function Orders() {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
+  const CheckboxGroup = Checkbox.Group;
+  const plainOptions = [""];
+  const [checkedList, setCheckedList] = useState();
+  const [indeterminate, setIndeterminate] = useState(true);
+  const [checkAll, setCheckAll] = useState(false);
+  const [page, setPage] = useState(1);
+  const [selectClass, setselectClass] = useState("blue");
+
+  const onCheckAllChange = (e) => {
+    setCheckAll(e.target.checked);
+  };
+
+  function selectChange(e) {
+    if (e.target[0].selected == true) {
+      setselectClass("blue");
+    } else if (e.target[1].selected === true) {
+      setselectClass("green");
+    } else {
+      setselectClass("red");
+    }
+  }
+  function changeHandler(e) {
+    console.log(e);
+  }
+
+  function switchPage(e) {
+    setPage(e);
+  }
 
   useEffect(() => {
-    userService
-      .getAllUser({ token: user.token })
-      .then((e) => e.json())
-      .then((e) => console.log(e));
-    otherServices
-      .getAllOrders({ token: user.token })
+    fetch(`https://dev-api.mstars.mn/api/orders?page=${page}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ token: user.token }),
+    })
       .then((e) => e.json())
       .then((e) => {
-        setOrder(e.data);
         console.log(e);
+        setOrder(e.data.docs);
       });
-  }, []);
+  }, [page]);
 
   return (
     <div>
@@ -34,7 +63,7 @@ export default function Orders() {
       <List
         header={
           <div className="header">
-            <Checkbox></Checkbox>
+            <Checkbox onChange={onCheckAllChange} checked={checkAll}></Checkbox>
             <span>Он сар өдөр</span>
             <span>Захиалга #</span>
             <span>Хэрэглэгч</span>
@@ -45,64 +74,45 @@ export default function Orders() {
             <span>Төлөв</span>
           </div>
         }
-        footer={<div></div>}
+        footer={
+          <div>
+            <Pagination defaultCurrent={1} total={60} onChange={switchPage} />
+          </div>
+        }
         bordered
         dataSource={order}
         renderItem={(item) => {
           return (
             <>
-              <List.Item className="listItems">
-                <Row className="rowss">
-                  {/* <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.number}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col> */}
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 1, offset: 1 }}
+              <div className="lists">
+                <Checkbox
+                  onChange={changeHandler}
+                  checked={checkAll}
+                ></Checkbox>
+                <p> {moment(item.created_date).format("YYYY/MM/DD")}</p>
+                <p>{item.status}</p>
+                <p>{item.payment_type}</p>
+                <p>{item.total_price}</p>
+                <select
+                  name="status"
+                  className={selectClass}
+                  onChange={selectChange}
+                >
+                  <option
+                    value="waiting"
+                    className="waiting"
+                    // onChange={selectChange}
                   >
-                    {moment(item.created_date).format("YYYY/MM/DD hh:mm")}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 11, offset: 1 }}
-                    lg={{ span: 2, offset: 1 }}
-                  >
-                    {item.__v}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 2, offset: 1 }}
-                  >
-                    {item.status}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 2, offset: 1 }}
-                  >
-                    {item.total_price}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 2, offset: 1 }}
-                  >
-                    {item.payment_type}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 2, offset: 1 }}
-                  >
-                    {item.status}
-                  </Col>
-                </Row>
-              </List.Item>
+                    Хүлээн авсан
+                  </option>
+                  <option value="success" className="success">
+                    Амжилттай
+                  </option>
+                  <option value="canceled" className="canceled">
+                    Цуцлагдсан
+                  </option>
+                </select>
+              </div>
             </>
           );
         }}

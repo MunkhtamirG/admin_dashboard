@@ -8,22 +8,12 @@ import Users from "./SideMenu/Users";
 import Deliverymen from "./SideMenu/Deliverymen";
 import "antd/dist/antd.css";
 import "../style/main.css";
-import {
-  Button,
-  Drawer,
-  Layout,
-  Menu,
-  Space,
-  Dropdown,
-  Form,
-  Input,
-} from "antd";
+import { Button, Drawer, Layout, Menu, Space, Dropdown } from "antd";
 import Icons from "../pictures/icons/icons.js";
 import { MENU } from "../util/constants";
 import { DownOutlined } from "@ant-design/icons";
 import react from "react";
 import { useState } from "react";
-import { userService } from "../services/userService";
 import { useUser } from "../contexts/UserContext";
 import DrawerPanel from "./DrawerPanel";
 

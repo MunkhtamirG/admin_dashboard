@@ -1,42 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useOrder } from "../../contexts/OrderContext";
-import { List, Row, Col, Divider, Checkbox, Pagination } from "antd";
+import {
+  List,
+  Menu,
+  Dropdown,
+  Space,
+  Divider,
+  Checkbox,
+  Pagination,
+  Drawer,
+  Form,
+} from "antd";
 import "../../style/menuStyle/orders.css";
-import { otherServices } from "../../services/otherServices";
 import { useUser } from "../../contexts/UserContext";
 import moment from "moment";
-import { useState } from "react";
+import Icons from "../../pictures/icons/icons";
 
 export default function Orders() {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
-  const CheckboxGroup = Checkbox.Group;
-  const plainOptions = [""];
-  const [checkedList, setCheckedList] = useState();
-  const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   const [page, setPage] = useState(1);
-  const [selectClass, setselectClass] = useState("blue");
+  const [visible, setVisible] = useState(false);
+  const [index, setIndex] = useState();
 
-  const onCheckAllChange = (e) => {
-    setCheckAll(e.target.checked);
+  const showDrawer = () => {
+    setVisible(true);
   };
 
-  function selectChange(e) {
-    if (e.target[0].selected == true) {
-      setselectClass("blue");
-    } else if (e.target[1].selected === true) {
-      setselectClass("green");
-    } else {
-      setselectClass("red");
-    }
-  }
-  function changeHandler(e) {
-    console.log(e);
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  function deleteOrder() {
+    setOrder(order.filter((item) => item !== order[index]));
   }
 
   function switchPage(e) {
     setPage(e);
+  }
+
+  function findIndex(i) {
+    setIndex(i);
   }
 
   useEffect(() => {
@@ -49,10 +54,32 @@ export default function Orders() {
     })
       .then((e) => e.json())
       .then((e) => {
-        console.log(e);
         setOrder(e.data.docs);
       });
   }, [page]);
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: (
+            <button className="see-button" onClick={showDrawer}>
+              Харах
+            </button>
+          ),
+          key: "0",
+        },
+        {
+          label: (
+            <button className="see-button" onClick={deleteOrder}>
+              Устгах
+            </button>
+          ),
+          key: "1",
+        },
+      ]}
+    />
+  );
 
   return (
     <div>
@@ -62,16 +89,23 @@ export default function Orders() {
       </Divider>
       <List
         header={
-          <div className="header">
-            <Checkbox onChange={onCheckAllChange} checked={checkAll}></Checkbox>
-            <span>Он сар өдөр</span>
-            <span>Захиалга #</span>
-            <span>Хэрэглэгч</span>
-            <span>Захиалга</span>
-            <span>Нийт дүн</span>
-            <span>Төлбөр</span>
-            <span>Утас</span>
-            <span>Төлөв</span>
+          <div className="head-section lists">
+            <Checkbox checked={checkAll}></Checkbox>
+            <span className="date">Он сар өдөр</span>
+            <span className="order-number">Захиалга #</span>
+            <span className="user">Хэрэглэгч</span>
+            <span className="order">Захиалга</span>
+            <span className="order">Нийт дүн</span>
+            <span className="order">Төлбөр</span>
+            <span className="order">Утас</span>
+            <span className="order">Төлөв</span>
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <img src={Icons.dots} alt="" />
+                </Space>
+              </a>
+            </Dropdown>
           </div>
         }
         footer={
@@ -81,23 +115,26 @@ export default function Orders() {
         }
         bordered
         dataSource={order}
-        renderItem={(item) => {
+        renderItem={(item, i) => {
           return (
             <>
               <div className="lists">
                 <Checkbox
-                  onChange={changeHandler}
-                  checked={checkAll}
+                // onChange={changeHandler}
+                // checked={checkAll}
                 ></Checkbox>
-                <p> {moment(item.created_date).format("YYYY/MM/DD")}</p>
-                <p>{item.status}</p>
-                <p>{item.payment_type}</p>
-                <p>{item.total_price}</p>
-                <select
-                  name="status"
-                  className={selectClass}
-                  onChange={selectChange}
-                >
+                <p className="date">
+                  {moment(item.created_date).format("YYYY/MM/DD")}
+                </p>
+                <p className="order-number">001</p>
+                <p className="user">Хатанбагана</p>
+                <p className="order">{item.orderDetails}</p>
+                <p className="order">
+                  {item.payment_type === "0" ? "Бэлэн" : "Картаар"}
+                </p>
+                <p className="order">{item.total_price}</p>
+                <p className="order">80395252</p>
+                <select name="status" className="select-status">
                   <option
                     value="waiting"
                     className="waiting"
@@ -112,7 +149,52 @@ export default function Orders() {
                     Цуцлагдсан
                   </option>
                 </select>
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  className="see-more"
+                  onClick={() => {
+                    findIndex(i);
+                  }}
+                >
+                  <a onClick={(e) => e.preventDefault()}>
+                    <Space>
+                      <img src={Icons.dots} alt="" />
+                    </Space>
+                  </a>
+                </Dropdown>
               </div>
+              <Drawer
+                title="#00001"
+                placement="right"
+                onClose={onClose}
+                visible={visible}
+              >
+                <p>Дэлгэрэнгүй</p>
+                <div className="details-order-upper-section">
+                  <h5>Захиалга</h5>
+                  <hr />
+                  <div>
+                    <p>
+                      Хулууны зутан<span>(1)</span>
+                    </p>
+                    <p className="price">8,800₮</p>
+                  </div>
+                  <div>
+                    <p>
+                      Брокколи зутан<span>(1)</span>
+                    </p>
+                    <p className="price">8,800₮</p>
+                  </div>
+                  <div>
+                    <p className="total">Нийт: </p>
+                    <p></p>
+                  </div>
+                </div>
+                <div>
+                  <Form></Form>
+                </div>
+              </Drawer>
             </>
           );
         }}

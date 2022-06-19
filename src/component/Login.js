@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Form, Input, Button } from "antd";
+import React from "react";
+import { Form, Input, Button, notification } from "antd";
 import "../style/login.css";
 import Icons from "../pictures/icons/icons.js";
 import { userService } from "../services/userService.js";
@@ -7,6 +7,13 @@ import { useUser } from "../contexts/UserContext";
 
 export default function Login() {
   const [user, setUser] = useUser();
+
+  const openNotificationWithIcon = (type) => {
+    notification[type]({
+      message: "Амжилттай нэвтэрлээ",
+    });
+  };
+
   const onFinish = (values) => {
     userService
 
@@ -20,7 +27,7 @@ export default function Login() {
             phone: res.data.phone,
             token: res.token,
           });
-          alert(res.status);
+          openNotificationWithIcon("success");
           setUser({
             email: res.data.email,
             userName: res.data.name,

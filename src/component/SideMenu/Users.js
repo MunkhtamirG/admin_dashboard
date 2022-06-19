@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { userService } from "../../services/userService";
 import "../../style/menuStyle/users.css";
-import { Checkbox, Input, Space, Table, Tag } from "antd";
+import { Dropdown, Menu, Space } from "antd";
+import Icons from "../../pictures/icons/icons";
 
 export default function Users() {
   const [user, setUser] = useUser();
@@ -15,7 +16,21 @@ export default function Users() {
       .then((e) => e.json())
       .then((e) => setUsers(e.data));
   }, []);
-  console.log(users);
+
+  const menu = (
+    <Menu
+      items={[
+        {
+          label: <>Харах</>,
+          key: "0",
+        },
+        {
+          label: <>Устгах</>,
+          key: "1",
+        },
+      ]}
+    />
+  );
 
   return (
     <div>
@@ -28,7 +43,13 @@ export default function Users() {
             <p>{e.address}</p>
             <p>{e.phone}</p>
             <p>{moment(e.created_date).format("YYYY/MM/DD")}</p>
-            <button>:</button>
+            <Dropdown overlay={menu} trigger={["click"]} className="see-more">
+              <a onClick={(e) => e.preventDefault()}>
+                <Space>
+                  <img src={Icons.dots} alt="" />
+                </Space>
+              </a>
+            </Dropdown>
           </div>
         );
       })}

@@ -23,26 +23,7 @@ export default function Orders() {
   const [page, setPage] = useState(1);
   const [visible, setVisible] = useState(false);
   const [index, setIndex] = useState();
-
-  const showDrawer = () => {
-    setVisible(true);
-  };
-
-  const onClose = () => {
-    setVisible(false);
-  };
-
-  function deleteOrder() {
-    setOrder(order.filter((item) => item !== order[index]));
-  }
-
-  function switchPage(e) {
-    setPage(e);
-  }
-
-  function findIndex(i) {
-    setIndex(i);
-  }
+  const [deleteOrders, setDeleteOrders] = useState([]);
 
   useEffect(() => {
     fetch(`https://dev-api.mstars.mn/api/orders?page=${page}`, {
@@ -57,6 +38,43 @@ export default function Orders() {
         setOrder(e.data.docs);
       });
   }, [page]);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  function deleteOrder() {
+    setOrder(order.filter((item) => item !== order[index]));
+    console.log(order[index]);
+  }
+
+  function switchPage(e) {
+    setPage(e);
+  }
+
+  function findIndex(i) {
+    setIndex(i);
+  }
+
+  let indexOfOrder = [];
+
+  function selectOrder(e, i) {
+    if (e.target.checked === true) {
+      indexOfOrder.push(i);
+    }
+    console.log(indexOfOrder);
+  }
+
+  function deleteSelectedOrders() {
+    let ordersAfterDeletion = order.filter((item) => {
+      return item !== order[indexOfOrder[1]];
+    });
+    setOrder(ordersAfterDeletion);
+  }
 
   const menu = (
     <Menu
@@ -81,6 +99,21 @@ export default function Orders() {
     />
   );
 
+  const DeleteAllBtn = (
+    <Menu
+      items={[
+        {
+          label: (
+            <button className="see-button" onClick={deleteSelectedOrders}>
+              Устгах
+            </button>
+          ),
+          key: "0",
+        },
+      ]}
+    />
+  );
+
   return (
     <div>
       <Divider orientation="left" className="page-header-name">
@@ -90,7 +123,7 @@ export default function Orders() {
       <List
         header={
           <div className="head-section lists">
-            <Checkbox checked={checkAll}></Checkbox>
+            <Checkbox></Checkbox>
             <span className="date">Он сар өдөр</span>
             <span className="order-number">Захиалга #</span>
             <span className="user">Хэрэглэгч</span>
@@ -99,7 +132,7 @@ export default function Orders() {
             <span className="order">Төлбөр</span>
             <span className="order">Утас</span>
             <span className="order">Төлөв</span>
-            <Dropdown overlay={menu} trigger={["click"]}>
+            <Dropdown overlay={DeleteAllBtn} trigger={["click"]}>
               <a onClick={(e) => e.preventDefault()}>
                 <Space>
                   <img src={Icons.dots} alt="" />
@@ -120,8 +153,9 @@ export default function Orders() {
             <>
               <div className="lists">
                 <Checkbox
-                // onChange={changeHandler}
-                // checked={checkAll}
+                  onChange={(e) => {
+                    selectOrder(e, i);
+                  }}
                 ></Checkbox>
                 <p className="date">
                   {moment(item.created_date).format("YYYY/MM/DD")}

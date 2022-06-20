@@ -47,11 +47,6 @@ export default function Orders() {
     setVisible(false);
   };
 
-  function deleteOrder() {
-    setOrder(order.filter((item) => item !== order[index]));
-    console.log(order[index]);
-  }
-
   function switchPage(e) {
     setPage(e);
   }
@@ -61,18 +56,30 @@ export default function Orders() {
   }
 
   let indexOfOrder = [];
+  let aaa = [];
 
   function selectOrder(e, i) {
     if (e.target.checked === true) {
       indexOfOrder.push(i);
+      aaa.push(order[i]);
     }
+    console.log(aaa);
     console.log(indexOfOrder);
   }
 
+  function deleteOrder() {
+    setOrder(order.filter((item) => item !== order[index]));
+  }
   function deleteSelectedOrders() {
-    let ordersAfterDeletion = order.filter((item) => {
-      return item !== order[indexOfOrder[1]];
-    });
+    let ordersAfterDeletion;
+
+    for (let i = 0; i < aaa.length; i++) {
+      ordersAfterDeletion = order.filter((item) => {
+        return item !== aaa[i];
+      });
+    }
+    console.log(ordersAfterDeletion);
+
     setOrder(ordersAfterDeletion);
   }
 

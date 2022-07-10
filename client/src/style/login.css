@@ -1,0 +1,98 @@
+.loginForm {
+  background-color: white;
+  padding: 100px 0px 100px 0px;
+  border-radius: 5%;
+  /* margin-left: 45%; */
+}
+
+.inner {
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(../pictures/images/login-background1.png);
+  background-size: cover;
+  width: 50vw;
+  height: 100vh;
+}
+.login-form {
+  width: 50vw;
+  margin: auto;
+  padding: 150px;
+}
+.login-right {
+  background: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0.8)
+    ),
+    url(../pictures/images/login-background1.png);
+
+  background-size: cover;
+  display: flex;
+  width: 100vw;
+}
+.logo-of-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.logo-of-form p {
+  margin: 0;
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 17.6804px;
+  color: #f17228;
+}
+.input {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+}
+.ant-input {
+  border-radius: 20px;
+  border: #f17228 1px solid;
+  width: 80%;
+  margin-left: 10%;
+}
+#basic_password {
+  margin: 0;
+  width: 100%;
+}
+
+.ant-input:hover {
+  border: #f17228 1px solid;
+  box-shadow: #f17228;
+}
+.input label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #f17228;
+  margin-left: 30%;
+}
+.ant-input-password {
+  border-radius: 20px;
+  border: #f17228 1px solid;
+  width: 80%;
+  margin-left: 10%;
+}
+.ant-form-item-label {
+  text-align: start;
+}
+.forget-pass-btn {
+  border: none;
+  background-color: white;
+  color: #f17228;
+  margin-top: 20px;
+  margin-left: 80px;
+}
+.login-button {
+  background-color: #f17228;
+  border: none;
+  width: 80%;
+  margin-left: 10%;
+  border-radius: 20px;
+  height: 40px;
+  font-size: 18px;
+}
+.login-button:hover {
+  background-color: #f17228 !important;
+}

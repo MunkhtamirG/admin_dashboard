@@ -25,19 +25,19 @@ export default function Orders() {
   const [index, setIndex] = useState();
   const [deleteOrders, setDeleteOrders] = useState([]);
 
-  useEffect(() => {
-    fetch(`https://dev-api.mstars.mn/api/orders?page=${page}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ token: user.token }),
-    })
-      .then((e) => e.json())
-      .then((e) => {
-        setOrder(e.data.docs);
-      });
-  }, [page]);
+  // useEffect(() => {
+  //   fetch(`https://dev-api.mstars.mn/api/orders?page=${page}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify({ token: user.token }),
+  //   })
+  //     .then((e) => e.json())
+  //     .then((e) => {
+  //       setOrder(e.data.docs);
+  //     });
+  // }, [page]);
 
   const showDrawer = () => {
     setVisible(true);

@@ -1,0 +1,93 @@
+.icon-name {
+  /* margin-top: 300px; */
+}
+
+.header {
+  background-color: #ffece1;
+  margin: 0;
+  text-align: right !important;
+}
+.sider {
+  margin: 0;
+  padding: 0;
+}
+.logo-name {
+  /* margin: 30px; */
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-top: 20px;
+}
+.logo-name img {
+  width: 40px;
+  margin-right: 5px;
+}
+.logo-name p {
+  color: #f17228;
+  margin: 0;
+  font-weight: 700;
+  font-size: 16px;
+}
+.contentLay {
+  background: linear-gradient(#f2c3a8, rgb(255, 255, 255));
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.admin-button {
+  border: none;
+  background-color: #ffece1;
+  box-shadow: none;
+  color: #f17228;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-button:hover {
+  border: none;
+  background-color: #ffece1;
+  box-shadow: none;
+  color: #f17228;
+  font-size: 14px;
+  font-weight: 600;
+}
+.admin-button img {
+  margin-right: 5px;
+}
+.ant-menu-item-active {
+  background-color: white !important;
+  color: #f17228 !important;
+}
+.ant-menu-item-selected {
+  background-color: white !important;
+  color: #f17228 !important;
+}
+.ant-menu-title-content {
+  font-size: 14px;
+  font-weight: 700;
+}
+.ant-menu-item-active::after {
+  border-right: 3px solid #f17228 !important;
+}
+.ant-menu-item-selected::after {
+  border-right: 3px solid #f17228 !important;
+}
+.dropdown-items {
+  background-color: white;
+  border: none;
+  box-shadow: none;
+}
+.settings-form-items {
+  display: flex;
+  flex-direction: column;
+}
+.ant-form-item-required {
+  margin-left: 20px;
+}
+.save-button {
+  background-color: #f17228;
+  border: none;
+  margin-top: 250px;
+  width: 100%;
+  border-radius: 10px;
+}
